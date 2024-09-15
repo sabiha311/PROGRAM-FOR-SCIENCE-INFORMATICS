@@ -4,7 +4,7 @@ cd~
 mkdir informatics_573
 cd informatics_573
 #download all secondary assemblies for human chromosome 1
-wget -r-l1-nd-A"CHR1_*" -R"chr1.fa.gz"
+wget -r-l1-nd-A"chr1_*" -R"chr1.fa.gz"
 #unzip all downloaded chromosome1 assemblies
 gunzip chr1_*
 #creating new empty file called "data_summary.txt:"
