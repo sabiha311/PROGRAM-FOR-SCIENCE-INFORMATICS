@@ -1,0 +1,118 @@
+#quetsion 1)
+file_path = "D:\\Python 3.12\\chr1_GL383518v1_alt.fa"
+
+# Open the FASTA file and read the sequence into a list
+with open(file_path, "r") as fasta_file:
+    # Read all lines and join them into a single string, ignoring the header line
+    sequence = ''.join(line.strip() for line in fasta_file if not line.startswith(">"))
+
+# Print the 10th letter (index 9 in 0-indexing)
+print(f"10th letter of the sequence: {sequence[9]}")
+
+# Print the 758th letter (index 757 in 0-indexing)
+print(f"758th letter of the sequence: {sequence[757]}")
+
+#Question 2
+
+# Define the file path to your fasta file (update with your file path)
+file_path = "D:\\Python 3.12\\chr1_GL383518v1_alt.fa"
+
+# Create a dictionary to map both uppercase and lowercase bases to their Watson-Crick-Franklin pairs
+complement = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C', 
+              'a': 't', 't': 'a', 'c': 'g', 'g': 'c'}
+
+# Initialize an empty string to store the sequence
+sequence = ""
+
+# Open the FASTA file and read the sequence (ignoring the header line)
+with open(file_path, "r") as fasta_file:
+    for line in fasta_file:
+        # Ignore the header line that starts with ">"
+        if not line.startswith(">"):
+            # Remove any newlines and append the sequence data
+            sequence += line.strip()
+
+# Create the reverse complement of the sequence
+reverse_complement = ''.join(complement[base] for base in reversed(sequence))
+
+# Print the 79th letter of the reverse complement (index 78 in 0-indexing)
+print(f"79th letter of the reverse complement: {reverse_complement[78]}")
+
+# Print the 500th through the 800th letters of the reverse complement (index 499 to 799)
+print(f"500th to 800th letters of the reverse complement: {reverse_complement[499:800]}")
+
+#Question 3
+
+# Define the file path to your fasta file (update with your file path)
+file_path = "D:\\Python 3.12\\chr1_GL383518v1_alt.fa"
+
+# Initialize an empty string to store the sequence
+sequence = ""
+
+# Open the FASTA file and read the sequence (ignoring the header line)
+with open(file_path, "r") as fasta_file:
+    for line in fasta_file:
+        # Ignore the header line that starts with ">"
+        if not line.startswith(">"):
+            # Remove any newlines and append the sequence data
+            sequence += line.strip()
+
+# Initialize an empty dictionary to hold the counts per kilobase
+my_dict = {}
+
+# Iterate through the sequence in steps of 1000 (kilobases)
+for i in range(0, len(sequence), 1000):
+    # Define the range of current kilobase (from i to i+1000)
+    kilobase_range = sequence[i:i+1000]
+    
+    # Initialize a dictionary to count the nucleotides for this kilobase
+    nucleotide_count = {'A': 0, 'T': 0, 'C': 0, 'G': 0}
+    
+    # Count each nucleotide in this kilobase
+    for nucleotide in kilobase_range:
+        if nucleotide in nucleotide_count:
+            nucleotide_count[nucleotide] += 1
+    
+    # Add the counts to the main dictionary, with key as the start position of the kilobase
+    my_dict[i] = nucleotide_count
+
+# Example output for the kilobase starting at position 5000
+print(f"Nucleotide counts from position 5000 to 6000: {my_dict.get(5000, 'Out of range')}")
+
+# Access specific counts,
+if 5000 in my_dict:
+    print(f"Number of 'A's from position 5000 to 6000: {my_dict[5000]['A']}")
+
+#Question 4)
+
+# Step 4a: Create a list with 4 elements containing the counts for A, C, G, and T in the first 1000 base pairs
+first_kb_list = [my_dict[0]['A'], my_dict[0]['C'], my_dict[0]['G'], my_dict[0]['T']]
+print(f"Counts in the first 1000 base pairs: {first_kb_list}")
+
+# Step 4b: Repeat this for each kilobase in the dictionary and store the lists
+all_kb_lists = []  # This will store lists of counts for each kilobase
+for start_position in sorted(my_dict.keys()):  # Iterate over each kilobase start position
+    kb_list = [my_dict[start_position]['A'], 
+               my_dict[start_position]['C'], 
+               my_dict[start_position]['G'], 
+               my_dict[start_position]['T']]
+    all_kb_lists.append(kb_list)
+
+# Step 4c: Calculate the sum of each list
+list_sums = [sum(kb_list) for kb_list in all_kb_lists]
+
+# Step 4d: Expected sum for each list (since each kilobase should contain 1000 bases)
+expected_sum = 1000
+
+# Print each list and its sum, and compare to the expected value
+for idx, kb_list in enumerate(all_kb_lists):
+    kb_sum = list_sums[idx]
+    print(f"Kilobase {idx + 1}: {kb_list}, Sum = {kb_sum}, Expected = {expected_sum}")
+
+# Step 4e: Are there any lists whose sums are not equal to 1000?
+# Let's find out
+unequal_sums = [idx + 1 for idx, kb_sum in enumerate(list_sums) if kb_sum != expected_sum]
+if unequal_sums:
+    print(f"There are {len(unequal_sums)} kilobases where the sum is not equal to 1000: {unequal_sums}")
+else:
+    print("All kilobases have the expected sum of 1000.")
