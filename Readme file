@@ -1,0 +1,6 @@
+Gene expression analysis of normal cells and tumor cells 
+the required libraries are pandas ,numpy,matplotlib,seaborn,openpyxl (for reading Excel files)
+we are using the datasets of gene _expression_ data.xlsx,gene information.csv,sample_information.tsv
+ we are using the python.py to run the analysis
+ for the visualisations we have used the heat map ,cluster map and the bar charts .                                                                     
+                                                                      
