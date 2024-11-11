@@ -109,3 +109,19 @@ if (length(unequal_sums) > 0) {
 } else {
   cat("All kilobases have the expected sum of 1000.\n")
 }
+#4e :1. # Q: What is the expected sum for each list?
+# A: The expected sum for each list is 1000, as each kilobase should ideally contain 1000 base pairs.
+
+# 2Q: Are there any lists whose sums are not equal to the expected value?
+if (length(unequal_sums) > 0) {
+  cat(sprintf("There are %d kilobases where the sum is not equal to 1000: %s\n", 
+              length(unequal_sums), toString(unequal_sums)))
+} else {
+  cat("All kilobases have the expected sum of 1000.\n")
+}
+
+# 3Q: Explanation for differences in expected and observed results
+# A: Differences in expected and observed sums can arise due to:
+#    - Non-standard characters in the sequence (e.g., 'N' for unknown bases), which are not counted in A, C, G, or T.
+#    - Partial kilobases: If the total sequence length is not a multiple of 1000, the final kilobase may contain fewer than 1000 bases.
+#    - These situations would result in kilobase sums that are less than the expected 1000.                            
