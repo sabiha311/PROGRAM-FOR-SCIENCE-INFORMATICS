@@ -1,1 +1,48 @@
+This is an assignment to work with DNA sequences in .fasta format. We have to read, analyze, and manipulate a DNA sequence file (chr1_GL383518v1_alt.fa). The language used here is  R and  it performs the following tasks:
+
+Read and Extract Specific Nucleotides: Reads a DNA sequence from a file and outputs specific letters.
+Reverse Complement Creation: Creates the reverse complement of the DNA sequence and outputs specific nucleotides.
+Nucleotide Count by Kilobase: Calculating  the count of each nucleotide (A, C, G, T) in segments of 1000 base pairs (kilobases).
+Data Frame and Sum Verification: Organizing  nucleotide counts in each kilobase into a data frame, checking that  if the counts match the expected total, and identifies any discrepancies.
+Files Included
+chr1_GL383518v1_alt.fa: The FASTA file containing the DNA sequence.
+script.R: R script contains all code for this project.
+README.md: This file, containing information on the project, how to run it, and expected results.
+Requirements
+R: we have to install R  on our system. we  can download it from https://cran.r-project.org/.
+Text Editor or IDE: RStudio  for editing and running the R code.
+Instructions
+1. Set Up Your Environment
+Clone the project repository or download the files into a local directory.
+Ensure the chr1_GL383518v1_alt.fa file is in the same directory as script.R.
+2. Run the Code
+Open script.R in RStudio or any R-compatible editor.
+Editing  the file_path variable to point to the correct path of chr1_GL383518v1_alt.fa.
+Running  each section in script.R, or run the entire file if  IDE supports it.
+3. Code Explanation
+Each part of the script performs a specific function, as detailed below:
+
+Part 1: Reading the Sequence and Printing Specific Letters
+This part reads the DNA sequence from the file, ignoring the header, and prints specific letters (10th and 758th) as required.
+
+Part 2: Creating the Reverse Complement
+This section generates the reverse complement of the DNA sequence by reversing the sequence and substituting each base with its Watson-Crick-Franklin pair. It then prints specific letters (79th) and a range (500th to 800th).
+
+Part 3: Counting Nucleotides in Each Kilobase
+Counts the occurrences of each nucleotide in each 1000-base segment of the DNA sequence, storing these counts in a list for easy access.
+
+Part 4: Verifying and Displaying Results
+This  creates a data frame from the counts of each kilobase. Each row of the data frame corresponds to a kilobase, and columns contain counts for A, C, G, and T. Additionally, it:
+
+Calculates the sum of each row.
+Compares each row’s sum to the expected value of 1000.
+Identifies and reports any rows with sums not equal to 1000.
+4. Expected Output and Explanation
+Expected Sum: Each kilobase (row) in the data frame is expected to sum to 1000, as each kilobase should ideally contain 1000 bases.
+
+Discrepancies: If there are kilobase rows with sums not equal to 1000, it may be due to:
+
+Non-standard characters (e.g., "N") in the sequence that don’t match A, C, G, or T.
+Incomplete kilobase: The last kilobase may have fewer than 1000 bases if the total sequence length isn’t an exact multiple of 1000.
+Conclusion :It explains about  reading, manipulating, and analyzing DNA sequences using R.  These  are some instructions which help us to  replicate the analysis and observe results in the output. The  deviations from expected results are explained based on typical biological sequence variations.
 
